@@ -181,7 +181,7 @@ extension StringPickerPopoverViewController: UIPickerViewDelegate {
         guard let image = image else {
             return nil
         }
-        let imageAttachment = NSTextAttachment()
+        let imageAttachment = TextAttachment()
         imageAttachment.image = image
         return NSAttributedString(attachment: imageAttachment)
     }
@@ -190,7 +190,7 @@ extension StringPickerPopoverViewController: UIPickerViewDelegate {
         let attributedResult = NSMutableAttributedString()
         
         if let image = popover.images?[row] {
-            let imageAttachment = NSTextAttachment()
+            let imageAttachment = TextAttachment()
             imageAttachment.image = image
             let attributedImage = NSAttributedString(attachment: imageAttachment)
             attributedResult.append(attributedImage)
@@ -229,3 +229,12 @@ extension StringPickerPopoverViewController: UIPickerViewDelegate {
     }
 }
 
+class TextAttachment: NSTextAttachment {
+    override func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
+        let y = ceil(abs((lineFrag.size.height - self.image!.size.height) / 2.0))
+        var bounds = CGRect()
+        bounds.origin = .init(x: 0.0, y: y * -1)
+        bounds.size = self.image!.size
+        return bounds
+    }
+}
