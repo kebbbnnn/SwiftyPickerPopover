@@ -80,6 +80,12 @@ class SampleViewController: UIViewController, UICollectionViewDataSource, UIColl
             .setFont(UIFont.boldSystemFont(ofSize: 30))
             .setFontColor(.orange)
             .setFontSize(14)
+            .setValueChange(action: { popover, _, selectedString in
+                print("current string: \(selectedString)")
+                DispatchQueue.main.async {
+                    popover.disappear()
+                }
+            })
             .setDoneButton(color: UIColor.red, action: {
                 popover, selectedRow, selectedString in
                 print("done row \(selectedRow) \(selectedString)")
