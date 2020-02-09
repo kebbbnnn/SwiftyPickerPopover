@@ -172,10 +172,21 @@ class StringPickerTableViewCell: UITableViewCell {
         let value: String = popover.choices[row]
         let adjustedValue: String = popover.displayStringFor?(value) ?? value
         let label = UILabel()
-        label.frame = self.contentView.frame
+        
+        let parentFrame = self.contentView.frame
+        let margin: CGFloat = parentFrame.size.width * (popover.marginPercentage / 100.0)
+        let labelX = parentFrame.origin.x + margin
+        let labelY = parentFrame.origin.y
+        
+        let labelWidth = parentFrame.size.width - (margin * 2)
+        let labelHeight = parentFrame.size.height
+        
+        let frame = CGRect(x: labelX, y: labelY, width: labelWidth, height: labelHeight)
+        
+        label.frame = frame
         label.text = adjustedValue
         label.attributedText = getAttributedText(image: popover.images?[row], text: adjustedValue)
-        label.textAlignment = .center
+        label.textAlignment = .left
         
         self.addSubview(label)
     }

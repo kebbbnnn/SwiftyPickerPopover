@@ -38,6 +38,8 @@ public class StringPickerPopover: AbstractPopover {
     private(set) var fontSize: CGFloat?
     let kDefaultFontSize: CGFloat = 14
     
+    private(set) var marginPercentage: CGFloat = 20.0
+    
     /// Convert a raw value to the string for displaying it
     private(set) var displayStringFor: DisplayStringForType?
     
@@ -92,6 +94,11 @@ public class StringPickerPopover: AbstractPopover {
     /// - Returns: Self
     public func setFontColor(_ color:UIColor) ->Self {
         self.fontColor = color
+        return self
+    }
+    
+    public func setMarginPercentage(_ marginPercentage: CGFloat) -> Self {
+        self.marginPercentage = marginPercentage
         return self
     }
     
