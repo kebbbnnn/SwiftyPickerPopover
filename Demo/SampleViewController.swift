@@ -80,6 +80,7 @@ class SampleViewController: UIViewController, UICollectionViewDataSource, UIColl
             .setFont(UIFont.boldSystemFont(ofSize: 30))
             .setFontColor(.orange)
             .setFontSize(14)
+            .setHideNavigationBar(hide: true)
             .setValueChange(action: { popover, _, selectedString in
                 print("current string: \(selectedString)")
                 DispatchQueue.main.async {

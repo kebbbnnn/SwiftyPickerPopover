@@ -48,6 +48,8 @@ open class AbstractPopover: NSObject {
     
     private(set) var isEnabledDimmedBackgroundView: Bool?
     
+    private(set) var hideNavigationBar: Bool?
+    
     override public init() {
         //Get a string as stroyboard name from this class name.
         storyboardName = String(describing: type(of: self))
@@ -99,6 +101,11 @@ open class AbstractPopover: NSObject {
         return self
     }
     
+    open func setHideNavigationBar(hide: Bool) -> Self {
+        hideNavigationBar = hide
+        return self
+    }
+    
     // MARK: - Popover display
     
     /// Display the popover.
@@ -134,6 +141,10 @@ open class AbstractPopover: NSObject {
         // configure StringPickerPopoverViewController
         let contentVC = configureContentViewController(navigationController: navigationController)
         navigationController.popoverPresentationController?.delegate = contentVC
+        
+        if let hide = hideNavigationBar, hide {
+            navigationController.setNavigationBarHidden(true, animated: false)
+        }
         
         let color = backgroundColor ?? baseViewController.navigationController?.navigationBar.barTintColor ?? baseViewController.view.backgroundColor
         navigationController.navigationBar.barTintColor = color
