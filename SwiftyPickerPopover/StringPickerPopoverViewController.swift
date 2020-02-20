@@ -31,6 +31,10 @@ public class StringPickerPopoverViewController: AbstractPickerPopoverViewControl
         table.dataSource = self
         table.isScrollEnabled = false
         
+        if popover.choices.count < 2 {
+            table.separatorStyle = .none
+        }
+        
         table.register(StringPickerTableViewCell.self, forCellReuseIdentifier: "StringPickerTableViewCell")
     }
 
