@@ -190,7 +190,7 @@ class StringPickerTableViewCell: UITableViewCell {
         label.frame = frame
         label.text = adjustedValue
         label.attributedText = getAttributedText(image: popover.images?[row], text: adjustedValue)
-        label.textAlignment = .left
+        label.textAlignment = margin > 0 ? .left : .center
         
         self.addSubview(label)
     }
